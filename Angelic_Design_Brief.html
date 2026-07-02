@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angelic Design — Design Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple-deep:  #0E0818;
+    --purple-dark:  #1C0F3D;
+    --purple-mid:   #3B0764;
+    --purple-core:  #6B21A8;
+    --purple-vivid: #9B4DFF;
+    --gold:         #E8A33D;
+    --gold-lt:      #FFD166;
+    --white:        #F8F6FF;
+    --text:         #1a1a2e;
+    --text-mid:     #4a4a6a;
+    --text-muted:   #8888aa;
+    --border:       #e4e0f0;
+    --border-str:   #c8c0e0;
+    --bg:           #f7f5fc;
+    --surface:      #ffffff;
+    --accent-bg:    #f0eaff;
+    --danger:       #c0392b;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--purple-deep);
+    background-image:
+      radial-gradient(ellipse at 20% 60%, rgba(107,33,168,.55) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 10%, rgba(155,77,255,.28) 0%, transparent 50%),
+      radial-gradient(ellipse at 60% 90%, rgba(232,163,61,.12) 0%, transparent 40%);
+    padding: 56px 24px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+    background-size: 42px 42px;
+    pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 1; max-width: 580px; margin: 0 auto; }
+
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 40px;
+    padding: 7px 20px 7px 8px;
+    margin-bottom: 32px;
+  }
+  .hero-pill-dot {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-vivid), var(--gold));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 800; color: #fff;
+  }
+  .hero-pill-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 700;
+    color: rgba(255,255,255,.88); letter-spacing: .04em;
+  }
+
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(34px, 8vw, 56px);
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -.025em;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  .hero-title .gold-text {
+    background: linear-gradient(90deg, var(--gold-lt), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero-sub {
+    font-size: 15px; font-weight: 300;
+    color: rgba(255,255,255,.48);
+    line-height: 1.7;
+    margin-bottom: 40px;
+    max-width: 420px; margin-left: auto; margin-right: auto;
+  }
+
+  .hero-steps {
+    display: flex; align-items: center;
+    justify-content: center; gap: 0; flex-wrap: wrap;
+  }
+  .step {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 12px; font-weight: 500;
+    color: rgba(255,255,255,.42); letter-spacing: .02em;
+  }
+  .step-num {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(155,77,255,.22);
+    border: 1px solid rgba(155,77,255,.45);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700; color: var(--purple-vivid);
+  }
+  .step-line {
+    width: 32px; height: 1px;
+    background: rgba(255,255,255,.12); margin: 0 6px;
+  }
+
+  /* ── FORM WRAP ── */
+  .form-wrap {
+    max-width: 660px;
+    margin: -24px auto 0;
+    padding: 0 16px 80px;
+    position: relative; z-index: 2;
+  }
+
+  /* ── SECTION CARD ── */
+  .sec {
+    background: var(--surface);
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(59,7,100,.06);
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .sec:focus-within {
+    border-color: rgba(155,77,255,.3);
+    box-shadow: 0 4px 28px rgba(155,77,255,.1);
+  }
+
+  .sec-head {
+    display: flex; align-items: center; gap: 14px;
+    padding: 22px 26px 20px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(135deg, rgba(107,33,168,.04) 0%, transparent 100%);
+  }
+  .sec-badge {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--purple-mid), var(--purple-core));
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px; font-weight: 800; color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(107,33,168,.3);
+  }
+  .sec-info {}
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700;
+    color: var(--purple-mid); letter-spacing: .01em;
+  }
+  .sec-desc {
+    font-size: 12px; color: var(--text-muted); margin-top: 2px;
+  }
+
+  .sec-body { padding: 26px 26px 10px; }
+
+  /* ── FIELD ── */
+  .field { margin-bottom: 22px; }
+  .field-label {
+    display: flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 600;
+    color: var(--text); margin-bottom: 7px;
+    letter-spacing: .01em;
+  }
+  .req-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--purple-vivid); flex-shrink: 0;
+  }
+  .hint {
+    font-size: 12px; color: var(--text-muted);
+    margin-bottom: 8px; line-height: 1.55;
+  }
+
+  input[type="text"],
+  input[type="date"],
+  textarea {
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px; font-weight: 400;
+    padding: 11px 15px;
+    border: 1.5px solid var(--border-str);
+    border-radius: 10px;
+    color: var(--text);
+    background: #fdfcff;
+    transition: border-color .15s, box-shadow .15s;
+    -webkit-appearance: none;
+  }
+  input[type="text"]::placeholder,
+  textarea::placeholder { color: #b0aac8; }
+  textarea { min-height: 84px; resize: vertical; }
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--purple-vivid);
+    box-shadow: 0 0 0 3.5px rgba(155,77,255,.13);
+    background: #fff;
+  }
+
+  /* ── CHIPS ── */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1.5px solid var(--border-str);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 13px; font-weight: 500;
+    cursor: pointer;
+    background: #fdfcff;
+    color: var(--text-mid);
+    user-select: none;
+    transition: all .15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .chip:hover { border-color: var(--purple-vivid); color: var(--purple-mid); background: var(--accent-bg); }
+  .chip.selected {
+    background: var(--accent-bg);
+    border-color: var(--purple-vivid);
+    color: var(--purple-mid);
+    font-weight: 600;
+  }
+
+  /* ── SUBMIT AREA ── */
+  .submit-area {
+    padding: 4px 26px 28px;
+  }
+  .err {
+    display: flex; align-items: flex-start; gap: 10px;
+    background: #fff5f5; border: 1.5px solid #fca5a5;
+    border-radius: 10px; padding: 12px 16px;
+    font-size: 13px; color: var(--danger);
+    margin-bottom: 16px; line-height: 1.5;
+  }
+  .btn {
+    width: 100%;
+    font-family: 'Syne', sans-serif;
+    font-size: 16px; font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, var(--purple-mid) 0%, var(--purple-core) 100%);
+    border: none; border-radius: 12px;
+    padding: 16px 28px;
+    cursor: pointer;
+    letter-spacing: .02em;
+    box-shadow: 0 6px 24px rgba(107,33,168,.38);
+    transition: opacity .15s, transform .12s, box-shadow .15s;
+  }
+  .btn:hover { opacity: .92; transform: translateY(-2px); box-shadow: 0 10px 32px rgba(107,33,168,.42); }
+  .btn:active { transform: translateY(0); }
+  .btn:disabled { opacity: .55; cursor: not-allowed; transform: none; box-shadow: none; }
+
+  .form-footer {
+    display: flex; align-items: center; justify-content: center;
+    flex-wrap: wrap; gap: 8px;
+    padding: 18px 26px 0;
+    font-size: 12px; color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+  }
+  .form-footer a { color: var(--purple-vivid); text-decoration: none; }
+  .fsep { color: var(--border-str); }
+
+  /* ── SUCCESS ── */
+  .success {
+    max-width: 500px; margin: 60px auto 40px;
+    background: var(--surface);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 56px 40px;
+    text-align: center;
+    box-shadow: 0 8px 40px rgba(59,7,100,.1);
+    display: none;
+  }
+  .success.show { display: block; }
+  .success-icon {
+    width: 76px; height: 76px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple-mid), var(--purple-core));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 10px 28px rgba(107,33,168,.38);
+    font-size: 32px;
+  }
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px; font-weight: 800;
+    color: var(--purple-mid); margin-bottom: 12px;
+  }
+  .success-body {
+    font-size: 14px; color: var(--text-muted);
+    line-height: 1.75; margin-bottom: 28px;
+  }
+  .success-note {
+    background: var(--accent-bg);
+    border: 1px solid rgba(155,77,255,.2);
+    border-radius: 12px; padding: 16px 20px;
+    font-size: 13px; color: var(--purple-mid);
+    line-height: 1.65; text-align: left;
+  }
+  .success-note strong { color: var(--purple-core); }
+
+  /* hide form on success */
+  .main-form.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<!-- SUCCESS STATE -->
+<div class="success" id="success">
+  <div class="success-icon">✓</div>
+  <div class="success-title">Brief Submitted!</div>
+  <p class="success-body">
+    Your email app has opened with the completed brief ready to send.<br>
+    Simply press <strong>Send</strong> to deliver it directly to Angelic Design.
+  </p>
+  <div class="success-note">
+    <strong>What happens next?</strong><br>
+    We'll review your brief and get back to you within 24 hours to discuss your project and confirm the next steps.
+  </div>
+</div>
+
+<!-- MAIN FORM -->
+<div class="main-form" id="mainForm">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-pill">
+        <div class="hero-pill-dot">A</div>
+        <span class="hero-pill-name">Angelic Design</span>
+      </div>
+      <h1 class="hero-title">Design <span class="gold-text">Brief</span> Form</h1>
+      <p class="hero-sub">Tell us everything about your project. The more detail you share, the better we can bring your vision to life.</p>
+      <div class="hero-steps">
+        <div class="step"><div class="step-num">1</div> Fill the form</div>
+        <div class="step-line"></div>
+        <div class="step"><div class="step-num">2</div> Submit brief</div>
+        <div class="step-line"></div>
+        <div class="step"><div class="step-num">3</div> We get to work</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-wrap">
+
+    <!-- 1. Client Info -->
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-badge">1</div>
+        <div class="sec-info">
+          <div class="sec-title">Client Information</div>
+          <div class="sec-desc">How we reach you</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> Name or business name</div>
+          <input type="text" id="name" placeholder="e.g. Kemi Adebayo / KemiBrands">
+        </div>
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> Phone / WhatsApp number</div>
+          <input type="text" id="phone" placeholder="+234 800 000 0000">
+        </div>
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> Email address</div>
+          <input type="text" id="email" placeholder="you@email.com">
+        </div>
+        <div class="field">
+          <div class="field-label">Instagram or social handle</div>
+          <input type="text" id="social" placeholder="@yourbrand">
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Project Overview -->
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-badge">2</div>
+        <div class="sec-info">
+          <div class="sec-title">Project Overview</div>
+          <div class="sec-desc">Tell us about your project</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> What service do you need?</div>
+          <div class="chips" id="services">
+            <div class="chip" data-group="services">Logo Design</div>
+            <div class="chip" data-group="services">Flyer / Poster</div>
+            <div class="chip" data-group="services">Social Media Graphics</div>
+            <div class="chip" data-group="services">Brand Kit / Identity</div>
+            <div class="chip" data-group="services">Business Card</div>
+            <div class="chip" data-group="services">Video Editing</div>
+            <div class="chip" data-group="services">UI/UX Design</div>
+            <div class="chip" data-group="services">Other</div>
+          </div>
+        </div>
+        <div class="field" id="serviceOtherField" style="display:none;">
+          <div class="field-label">Please specify</div>
+          <input type="text" id="serviceOther" placeholder="Describe the service needed">
+        </div>
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> Describe your business or brand</div>
+          <p class="hint">What do you do, who do you serve, what makes you different?</p>
+          <textarea id="businessDesc" placeholder="We are a fashion brand based in Lagos targeting young professionals aged 22–35..."></textarea>
+        </div>
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> What is the goal of this design?</div>
+          <p class="hint">e.g. promote an event, launch a product, build brand awareness</p>
+          <textarea id="goal" placeholder="We want to promote our new product launch at an event on the 15th..."></textarea>
+        </div>
+        <div class="field">
+          <div class="field-label">Who is your target audience?</div>
+          <p class="hint">Age, gender, interests, location — as specific as possible</p>
+          <textarea id="audience" placeholder="Women aged 25–40, interested in fashion and lifestyle, based in Lagos..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. Logo Details -->
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-badge">3</div>
+        <div class="sec-info">
+          <div class="sec-title">Logo Design Details</div>
+          <div class="sec-desc">Skip this section if your project is not a logo</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="field">
+          <div class="field-label">Do you already have a logo?</div>
+          <p class="hint">If yes, what would you like changed or improved?</p>
+          <textarea id="hasLogo" placeholder="Yes, we have a logo but want to modernise it. The current one feels outdated..."></textarea>
+        </div>
+        <div class="field">
+          <div class="field-label">What feeling should your logo convey?</div>
+          <div class="chips" id="logoFeel">
+            <div class="chip" data-group="logoFeel">Bold</div>
+            <div class="chip" data-group="logoFeel">Elegant</div>
+            <div class="chip" data-group="logoFeel">Playful</div>
+            <div class="chip" data-group="logoFeel">Minimal</div>
+            <div class="chip" data-group="logoFeel">Luxury</div>
+            <div class="chip" data-group="logoFeel">Edgy</div>
+            <div class="chip" data-group="logoFeel">Friendly</div>
+            <div class="chip" data-group="logoFeel">Corporate</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">What type of logo do you need?</div>
+          <div class="chips" id="logoType" data-single="true">
+            <div class="chip" data-group="logoType">Icon / symbol only</div>
+            <div class="chip" data-group="logoType">Text / wordmark only</div>
+            <div class="chip" data-group="logoType">Combination mark</div>
+            <div class="chip" data-group="logoType">Not sure yet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Visual Direction -->
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-badge">4</div>
+        <div class="sec-info">
+          <div class="sec-title">Visual Direction</div>
+          <div class="sec-desc">Colors, style and references</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> Preferred colors</div>
+          <p class="hint">Include your existing brand colors if you have them</p>
+          <input type="text" id="colors" placeholder="e.g. Deep purple and gold, or #9B4DFF and #FFD166">
+        </div>
+        <div class="field">
+          <div class="field-label">Colors to avoid</div>
+          <input type="text" id="avoidColors" placeholder="e.g. Red, bright green, orange">
+        </div>
+        <div class="field">
+          <div class="field-label">Style references</div>
+          <p class="hint">Brands, Instagram pages, or designers whose style you admire</p>
+          <textarea id="styleRefs" placeholder="I love the look of Nike, Zara, and @studiocreative on Instagram..."></textarea>
+        </div>
+        <div class="field">
+          <div class="field-label">Font style preference</div>
+          <input type="text" id="fonts" placeholder="Modern, bold, serif, handwritten — or a specific font name">
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Content & Deliverables -->
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-badge">5</div>
+        <div class="sec-info">
+          <div class="sec-title">Content & Deliverables</div>
+          <div class="sec-desc">What goes on the design and what files you need</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> What text must appear on the design?</div>
+          <p class="hint">Business name, tagline, address, phone, dates, prices — include everything</p>
+          <textarea id="copyText" placeholder="Business name: KemiBrands&#10;Phone: 0800 000 0000&#10;Date: Saturday 12 August, 4pm&#10;Venue: Eko Hotel, Lagos"></textarea>
+        </div>
+        <div class="field">
+          <div class="field-label">Tagline or slogan (if any)</div>
+          <input type="text" id="tagline" placeholder="e.g. Style that speaks for itself">
+        </div>
+        <div class="field">
+          <div class="field-label"><span class="req-dot"></span> Format(s) needed</div>
+          <div class="chips" id="formats">
+            <div class="chip" data-group="formats">Instagram Post (1:1)</div>
+            <div class="chip" data-group="formats">Instagram Story (9:16)</div>
+            <div class="chip" data-group="formats">Print — Flyer / Poster</div>
+            <div class="chip" data-group="formats">Web / Digital Banner</div>
+            <div class="chip" data-group="formats">LinkedIn Post</div>
+            <div class="chip" data-group="formats">Twitter / X Header</div>
+            <div class="chip" data-group="formats">Other</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Do you have assets to share?</div>
+          <p class="hint">Logo files, product photos, brand guide, existing designs</p>
+          <div class="chips" id="hasAssets" data-single="true">
+            <div class="chip" data-group="hasAssets">Yes — I will send them</div>
+            <div class="chip" data-group="hasAssets">No — I need everything created</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Logistics -->
+    <div class="sec">
+      <div class="sec-head">
+        <div class="sec-badge">6</div>
+        <div class="sec-info">
+          <div class="sec-title">Logistics</div>
+          <div class="sec-desc">Timeline, budget and how to reach you</div>
+        </div>
+      </div>
+      <div class="sec-body">
+        <div class="field">
+          <div class="field-label">Project deadline</div>
+          <input type="date" id="deadline">
+        </div>
+        <div class="field">
+          <div class="field-label">Budget range</div>
+          <p class="hint">This helps us recommend the right package for you</p>
+          <input type="text" id="budget" placeholder="e.g. ₦30,000 – ₦80,000">
+        </div>
+        <div class="field">
+          <div class="field-label">Number of revision rounds expected</div>
+          <input type="text" id="revisions" placeholder="e.g. 2 rounds">
+        </div>
+        <div class="field">
+          <div class="field-label">How would you like us to contact you?</div>
+          <div class="chips" id="contactMethod" data-single="true">
+            <div class="chip" data-group="contactMethod">WhatsApp</div>
+            <div class="chip" data-group="contactMethod">Phone Call</div>
+            <div class="chip" data-group="contactMethod">Email</div>
+            <div class="chip" data-group="contactMethod">Instagram DM</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Anything else we should know?</div>
+          <textarea id="extra" placeholder="Any additional context, inspiration, or special requirements…"></textarea>
+        </div>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="submit-area">
+        <div class="err" id="errMsg" style="display:none;">
+          <span>⚠</span>
+          <span id="errText"></span>
+        </div>
+        <button class="btn" id="submitBtn" onclick="handleSubmit()">
+          Submit Design Brief →
+        </button>
+        <div class="form-footer">
+          <span>© 2025 Angelic Design</span>
+          <span class="fsep">·</span>
+          <span>+234 703 986 9828</span>
+          <span class="fsep">·</span>
+          <a href="mailto:mustaphaopeyemi821@gmail.com">mustaphaopeyemi821@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /form-wrap -->
+</div><!-- /main-form -->
+
+<script>
+  // ── CHIP TOGGLE ──
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      const group = this.dataset.group;
+      const parent = document.getElementById(group);
+      const isSingle = parent && parent.dataset.single === 'true';
+
+      if (isSingle) {
+        parent.querySelectorAll('.chip').forEach(c => c.classList.remove('selected'));
+        this.classList.toggle('selected');
+      } else {
+        this.classList.toggle('selected');
+      }
+
+      // show/hide service other field
+      if (group === 'services') {
+        const otherSelected = Array.from(document.querySelectorAll('#services .chip.selected'))
+          .some(c => c.textContent === 'Other');
+        document.getElementById('serviceOtherField').style.display = otherSelected ? 'block' : 'none';
+      }
+    });
+  });
+
+  // ── GET SELECTED CHIPS ──
+  function getChips(groupId) {
+    return Array.from(document.querySelectorAll('#' + groupId + ' .chip.selected'))
+      .map(c => c.textContent).join(', ') || '—';
+  }
+
+  // ── VALIDATE & SUBMIT ──
+  function handleSubmit() {
+    const errEl = document.getElementById('errMsg');
+    const errText = document.getElementById('errText');
+    errEl.style.display = 'none';
+
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const services = getChips('services');
+    const businessDesc = document.getElementById('businessDesc').value.trim();
+    const goal = document.getElementById('goal').value.trim();
+
+    if (!name || !phone || !email) {
+      errText.textContent = 'Please complete your name, phone number, and email before submitting.';
+      errEl.style.display = 'flex'; errEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); return;
+    }
+    if (services === '—') {
+      errText.textContent = 'Please select at least one service.';
+      errEl.style.display = 'flex'; errEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); return;
+    }
+    if (!businessDesc || !goal) {
+      errText.textContent = 'Please describe your business and the goal of this design.';
+      errEl.style.display = 'flex'; errEl.scrollIntoView({ behavior: 'smooth', block: 'center' }); return;
+    }
+
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = 'Preparing your brief…';
+
+    const lines = [
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      '      NEW DESIGN BRIEF — ANGELIC DESIGN',
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      '',
+      '[ 1 — CLIENT INFORMATION ]',
+      'Name / Business  : ' + name,
+      'Phone / WhatsApp : ' + phone,
+      'Email            : ' + email,
+      'Social Handle    : ' + (document.getElementById('social').value.trim() || '—'),
+      '',
+      '[ 2 — PROJECT OVERVIEW ]',
+      'Services         : ' + services + (document.getElementById('serviceOther').value.trim() ? ' (' + document.getElementById('serviceOther').value.trim() + ')' : ''),
+      'Business Desc    : ' + businessDesc,
+      'Design Goal      : ' + goal,
+      'Target Audience  : ' + (document.getElementById('audience').value.trim() || '—'),
+      '',
+      '[ 3 — LOGO DETAILS ]',
+      'Existing Logo    : ' + (document.getElementById('hasLogo').value.trim() || '—'),
+      'Logo Feel        : ' + getChips('logoFeel'),
+      'Logo Type        : ' + getChips('logoType'),
+      '',
+      '[ 4 — VISUAL DIRECTION ]',
+      'Preferred Colors : ' + (document.getElementById('colors').value.trim() || '—'),
+      'Colors to Avoid  : ' + (document.getElementById('avoidColors').value.trim() || '—'),
+      'Style References : ' + (document.getElementById('styleRefs').value.trim() || '—'),
+      'Font Preference  : ' + (document.getElementById('fonts').value.trim() || '—'),
+      '',
+      '[ 5 — CONTENT & DELIVERABLES ]',
+      'Required Copy    : ' + (document.getElementById('copyText').value.trim() || '—'),
+      'Tagline / Slogan : ' + (document.getElementById('tagline').value.trim() || '—'),
+      'Formats Needed   : ' + getChips('formats'),
+      'Existing Assets  : ' + getChips('hasAssets'),
+      '',
+      '[ 6 — LOGISTICS ]',
+      'Deadline         : ' + (document.getElementById('deadline').value || '—'),
+      'Budget Range     : ' + (document.getElementById('budget').value.trim() || '—'),
+      'Revisions        : ' + (document.getElementById('revisions').value.trim() || '—'),
+      'Contact Method   : ' + getChips('contactMethod'),
+      'Extra Notes      : ' + (document.getElementById('extra').value.trim() || '—'),
+      '',
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+      '  Submitted via Angelic Design Brief Form',
+      '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+    ];
+
+    const subject = encodeURIComponent('Design Brief — ' + name);
+    const body = encodeURIComponent(lines.join('\n'));
+    window.location.href = 'mailto:mustaphaopeyemi821@gmail.com?subject=' + subject + '&body=' + body;
+
+    setTimeout(() => {
+      document.getElementById('mainForm').classList.add('hidden');
+      document.getElementById('success').classList.add('show');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 600);
+  }
+</script>
+</body>
+</html>
